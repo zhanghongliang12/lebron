@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3d89c49-c4ef-4cff-ae78-204c161c4d84" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pkg/interceptor/rpcserver/loggerInterceptor.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/user/user_rpc/userrpc.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/user_rpc/userrpc.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +38,12 @@
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/ysh/code/go/lebron/apps/pay/admin"
+    "last_opened_file_path": "/Users/ysh/code/go/lebron/pkg"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pkg" />
       <recent name="$PROJECT_DIR$/apps/pay/admin" />
       <recent name="$PROJECT_DIR$/apps/order/admin" />
     </key>
