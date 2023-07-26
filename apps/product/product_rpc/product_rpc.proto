@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package product_rpc;
+option go_package="./product_rpc";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Product_rpc {
+  rpc Ping(Request) returns(Response);
+}
