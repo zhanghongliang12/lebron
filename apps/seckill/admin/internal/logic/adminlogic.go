@@ -3,8 +3,8 @@ package logic
 import (
 	"context"
 
-	"lebron/apps/seckill/admin/internal/svc"
-	"lebron/apps/seckill/admin/internal/types"
+	"github.com/zhanghongliang12/lebron/apps/seckill/admin/internal/svc"
+	"github.com/zhanghongliang12/lebron/apps/seckill/admin/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

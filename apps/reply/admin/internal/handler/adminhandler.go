@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"lebron/apps/reply/admin/internal/logic"
-	"lebron/apps/reply/admin/internal/svc"
-	"lebron/apps/reply/admin/internal/types"
+	"github.com/zhanghongliang12/lebron/apps/reply/admin/internal/logic"
+	"github.com/zhanghongliang12/lebron/apps/reply/admin/internal/svc"
+	"github.com/zhanghongliang12/lebron/apps/reply/admin/internal/types"
 )
 
 func AdminHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -3,10 +3,10 @@ package handler
 import (
 	"net/http"
 
-	"admin/internal/logic"
-	"admin/internal/svc"
-	"admin/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
+	"github.com/zhanghongliang12/lebron/apps/order/admin/internal/logic"
+	"github.com/zhanghongliang12/lebron/apps/order/admin/internal/svc"
+	"github.com/zhanghongliang12/lebron/apps/order/admin/internal/types"
 )
 
 func AdminHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
