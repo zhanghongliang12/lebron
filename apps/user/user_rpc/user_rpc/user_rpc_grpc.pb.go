@@ -41,8 +41,7 @@ func (c *userRpcClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 type UserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 }
-type UnimplementedUserServer struct {
-}
+type UnimplementedUserServer struct {}
 func (UnimplementedUserServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
@@ -74,7 +73,7 @@ func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interfac
 }
 
 var User_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.User",
+	ServiceName: "user_rpc.User_rpc",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
