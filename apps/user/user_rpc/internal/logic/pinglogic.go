@@ -3,10 +3,8 @@ package logic
 import (
 	"context"
 
-	"github.com/zhanghongliang12/lebron/apps/user/user_rpc/internal/svc"
-	"github.com/zhanghongliang12/lebron/apps/user/user_rpc/user_rpc"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zhanghongliang12/lebron/apps/user/user_rpc/internal/svc"
 )
 
 type PingLogic struct {
@@ -21,10 +19,4 @@ func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
-}
-
-func (l *PingLogic) Ping(in *user_rpc.Request) (*user_rpc.Response, error) {
-	// todo: add your logic here and delete this line
-
-	return &user_rpc.Response{}, nil
 }

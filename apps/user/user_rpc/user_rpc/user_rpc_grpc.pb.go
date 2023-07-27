@@ -13,20 +13,12 @@ import (
 	status "google.golang.org/grpc/status"
 )
 
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-const (
-	UserRpc_Ping_FullMethodName = "/user_rpc.User_rpc/Ping"
-)
 
-// UserRpcClient is the client API for UserRpc service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//  接口
 type UserRpcClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 }
 
 type userRpcClient struct {
@@ -37,71 +29,57 @@ func NewUserRpcClient(cc grpc.ClientConnInterface) UserRpcClient {
 	return &userRpcClient{cc}
 }
 
-func (c *userRpcClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserRpc_Ping_FullMethodName, in, out, opts...)
+func (c *userRpcClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, "/user.User/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// UserRpcServer is the server API for UserRpc service.
-// All implementations must embed UnimplementedUserRpcServer
-// for forward compatibility
-type UserRpcServer interface {
-	Ping(context.Context, *Request) (*Response, error)
-	mustEmbedUnimplementedUserRpcServer()
+type UserServer interface {
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+}
+type UnimplementedUserServer struct {
+}
+func (UnimplementedUserServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 
-// UnimplementedUserRpcServer must be embedded to have forward compatible implementations.
-type UnimplementedUserRpcServer struct {
+type UnsafeUserServer interface {
+	mustEmbedUnimplementedUserServer()
 }
 
-func (UnimplementedUserRpcServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
-}
-func (UnimplementedUserRpcServer) mustEmbedUnimplementedUserRpcServer() {}
-
-// UnsafeUserRpcServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to UserRpcServer will
-// result in compilation errors.
-type UnsafeUserRpcServer interface {
-	mustEmbedUnimplementedUserRpcServer()
+func RegisterUserServer(s grpc.ServiceRegistrar, srv UserServer) {
+	s.RegisterService(&User_ServiceDesc, srv)
 }
 
-func RegisterUserRpcServer(s grpc.ServiceRegistrar, srv UserRpcServer) {
-	s.RegisterService(&UserRpc_ServiceDesc, srv)
-}
-
-func _UserRpc_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _User_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserRpcServer).Ping(ctx, in)
+		return srv.(UserServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserRpc_Ping_FullMethodName,
+		FullMethod: "/user_rpc.User/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserRpcServer).Ping(ctx, req.(*Request))
+		return srv.(UserServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// UserRpc_ServiceDesc is the grpc.ServiceDesc for UserRpc service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var UserRpc_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user_rpc.User_rpc",
-	HandlerType: (*UserRpcServer)(nil),
+var User_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.User",
+	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _UserRpc_Ping_Handler,
+			MethodName: "Login",
+			Handler:    _User_Login_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

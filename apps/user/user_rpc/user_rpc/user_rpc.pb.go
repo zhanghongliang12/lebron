@@ -20,31 +20,30 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Request struct {
+type LoginRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ping string `protobuf:"bytes,1,opt,name=ping,proto3" json:"ping,omitempty"`
+	Username string `protobuf:"bytes,1,opt,name=Username,proto3" json:"Username,omitempty"`
+	Password string `protobuf:"bytes,2,opt,name=Password,proto3" json:"Password,omitempty"`
 }
 
-func (x *Request) Reset() {
-	*x = Request{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_user_rpc_proto_msgTypes[0]
+func (x *LoginRequest) Reset(){
+	*x = LoginRequest{}
+	if protoimpl.UnsafeEnabled{
+		mi:=&file_user_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
-
-func (x *Request) String() string {
+func (x *LoginRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request) ProtoMessage() {}
-
-func (x *Request) ProtoReflect() protoreflect.Message {
-	mi := &file_user_rpc_proto_msgTypes[0]
+func (x *LoginRequest) ProtoMessage(){}
+func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,68 +54,31 @@ func (x *Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Request.ProtoReflect.Descriptor instead.
-func (*Request) Descriptor() ([]byte, []int) {
-	return file_user_rpc_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Request) GetPing() string {
-	if x != nil {
-		return x.Ping
-	}
-	return ""
-}
-
-type Response struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
-}
-
-func (x *Response) Reset() {
-	*x = Response{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_user_rpc_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Response) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Response) ProtoMessage() {}
-
-func (x *Response) ProtoReflect() protoreflect.Message {
-	mi := &file_user_rpc_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Response.ProtoReflect.Descriptor instead.
-func (*Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
+func (*LoginRequest) Descriptor() ([]byte, []int) {
 	return file_user_rpc_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Response) GetPong() string {
-	if x != nil {
-		return x.Pong
-	}
-	return ""
+
+
+type LoginResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       int64  `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`
+	Username string `protobuf:"bytes,2,opt,name=Username,proto3" json:"Username,omitempty"`
+	Phone    string `protobuf:"bytes,3,opt,name=Phone,proto3" json:"Phone,omitempty"`
 }
 
-var File_user_rpc_proto protoreflect.FileDescriptor
 
-var file_user_rpc_proto_rawDesc = []byte{
+
+
+
+
+var File_user_proto protoreflect.FileDescriptor
+
+var file_user_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x72, 0x70, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x08, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x72, 0x70, 0x63, 0x22, 0x1d, 0x0a, 0x07, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x69, 0x6e, 0x67, 0x18, 0x01, 0x20,
@@ -132,7 +94,7 @@ var file_user_rpc_proto_rawDesc = []byte{
 
 var (
 	file_user_rpc_proto_rawDescOnce sync.Once
-	file_user_rpc_proto_rawDescData = file_user_rpc_proto_rawDesc
+	file_user_rpc_proto_rawDescData = file_user_proto_rawDesc
 )
 
 func file_user_rpc_proto_rawDescGZIP() []byte {
@@ -142,29 +104,67 @@ func file_user_rpc_proto_rawDescGZIP() []byte {
 	return file_user_rpc_proto_rawDescData
 }
 
-var file_user_rpc_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_user_rpc_proto_goTypes = []interface{}{
-	(*Request)(nil),  // 0: user_rpc.Request
-	(*Response)(nil), // 1: user_rpc.Response
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_user_proto_goTypes = []interface{}{
+	//(*UserInfo)(nil),                  // 0: user.UserInfo
+	(*LoginRequest)(nil),              // 1: user.LoginRequest
+	(*LoginResponse)(nil),             // 2: user.LoginResponse
+	//(*UserInfoRequest)(nil),           // 3: user.UserInfoRequest
+	//(*UserInfoResponse)(nil),          // 4: user.UserInfoResponse
+	//(*UserReceiveAddressAddReq)(nil),  // 5: user.UserReceiveAddressAddReq
+	//(*UserReceiveAddressAddRes)(nil),  // 6: user.UserReceiveAddressAddRes
+	//(*UserReceiveAddressListReq)(nil), // 7: user.UserReceiveAddressListReq
+	//(*UserReceiveAddress)(nil),        // 8: user.UserReceiveAddress
+	//(*UserReceiveAddressListRes)(nil), // 9: user.UserReceiveAddressListRes
+	//(*UserReceiveAddressEditReq)(nil), // 10: user.UserReceiveAddressEditReq
+	//(*UserReceiveAddressEditRes)(nil), // 11: user.UserReceiveAddressEditRes
+	//(*UserReceiveAddressDelReq)(nil),  // 12: user.UserReceiveAddressDelReq
+	//(*UserReceiveAddressDelRes)(nil),  // 13: user.UserReceiveAddressDelRes
+	//(*UserCollectionAddReq)(nil),      // 14: user.UserCollectionAddReq
+	//(*UserCollectionAddRes)(nil),      // 15: user.UserCollectionAddRes
+	//(*UserCollectionDelReq)(nil),      // 16: user.UserCollectionDelReq
+	//(*UserCollectionDelRes)(nil),      // 17: user.UserCollectionDelRes
+	//(*UserCollectionListReq)(nil),     // 18: user.UserCollectionListReq
+	//(*UserCollectionListRes)(nil),     // 19: user.UserCollectionListRes
+	//(*UserReceiveAddressInfoReq)(nil), // 14: user.UserReceiveAddressInfoReq
 }
-var file_user_rpc_proto_depIdxs = []int32{
-	0, // 0: user_rpc.User_rpc.Ping:input_type -> user_rpc.Request
-	1, // 1: user_rpc.User_rpc.Ping:output_type -> user_rpc.Response
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+var file_user_proto_depIdxs = []int32{
+	0,  // 0: user.UserInfoResponse.user:type_name -> user.UserInfo
+	8,  // 1: user.UserReceiveAddressListRes.list:type_name -> user.UserReceiveAddress
+	1,  // 2: user.User.Login:input_type -> user.LoginRequest
+	3,  // 3: user.User.UserInfo:input_type -> user.UserInfoRequest
+	5,  // 4: user.User.addUserReceiveAddress:input_type -> user.UserReceiveAddressAddReq
+	10, // 5: user.User.editUserReceiveAddress:input_type -> user.UserReceiveAddressEditReq
+	12, // 6: user.User.delUserReceiveAddress:input_type -> user.UserReceiveAddressDelReq
+	7,  // 7: user.User.getUserReceiveAddressList:input_type -> user.UserReceiveAddressListReq
+	14, // 8: user.User.addUserCollection:input_type -> user.UserCollectionAddReq
+	16, // 9: user.User.delUserCollection:input_type -> user.UserCollectionDelReq
+	18, // 10: user.User.getUserCollectionList:input_type -> user.UserCollectionListReq
+	2,  // 11: user.User.Login:output_type -> user.LoginResponse
+	4,  // 12: user.User.UserInfo:output_type -> user.UserInfoResponse
+	6,  // 13: user.User.addUserReceiveAddress:output_type -> user.UserReceiveAddressAddRes
+	11, // 14: user.User.editUserReceiveAddress:output_type -> user.UserReceiveAddressEditRes
+	13, // 15: user.User.delUserReceiveAddress:output_type -> user.UserReceiveAddressDelRes
+	9,  // 16: user.User.getUserReceiveAddressList:output_type -> user.UserReceiveAddressListRes
+	15, // 17: user.User.addUserCollection:output_type -> user.UserCollectionAddRes
+	17, // 18: user.User.delUserCollection:output_type -> user.UserCollectionDelRes
+	19, // 19: user.User.getUserCollectionList:output_type -> user.UserCollectionListRes
+	11, // [11:20] is the sub-list for method output_type
+	2,  // [2:11] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_user_rpc_proto_init() }
-func file_user_rpc_proto_init() {
-	if File_user_rpc_proto != nil {
+func init() { file_user_proto_init() }
+func file_user_proto_init() {
+	if File_user_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_user_rpc_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Request); i {
+
+		file_user_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LoginRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -175,8 +175,8 @@ func file_user_rpc_proto_init() {
 				return nil
 			}
 		}
-		file_user_rpc_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Response); i {
+		file_user_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LoginResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -187,23 +187,26 @@ func file_user_rpc_proto_init() {
 				return nil
 			}
 		}
+
+
+
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_user_rpc_proto_rawDesc,
+			RawDescriptor: file_user_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_user_rpc_proto_goTypes,
-		DependencyIndexes: file_user_rpc_proto_depIdxs,
-		MessageInfos:      file_user_rpc_proto_msgTypes,
+		GoTypes:           file_user_proto_goTypes,
+		DependencyIndexes: file_user_proto_depIdxs,
+		MessageInfos:      file_user_proto_msgTypes,
 	}.Build()
-	File_user_rpc_proto = out.File
-	file_user_rpc_proto_rawDesc = nil
-	file_user_rpc_proto_goTypes = nil
-	file_user_rpc_proto_depIdxs = nil
+	File_user_proto = out.File
+	file_user_proto_rawDesc = nil
+	file_user_proto_goTypes = nil
+	file_user_proto_depIdxs = nil
 }

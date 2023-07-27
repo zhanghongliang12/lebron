@@ -5,6 +5,7 @@ package server
 
 import (
 	"context"
+	"github.com/zhoushuguang/lebron/apps/user/rpc/user"
 
 	"github.com/zhanghongliang12/lebron/apps/user/user_rpc/internal/logic"
 	"github.com/zhanghongliang12/lebron/apps/user/user_rpc/internal/svc"
@@ -13,7 +14,7 @@ import (
 
 type UserRpcServer struct {
 	svcCtx *svc.ServiceContext
-	user_rpc.UnimplementedUserRpcServer
+	user_rpc.UnimplementedUserServer
 }
 
 func NewUserRpcServer(svcCtx *svc.ServiceContext) *UserRpcServer {
@@ -22,7 +23,7 @@ func NewUserRpcServer(svcCtx *svc.ServiceContext) *UserRpcServer {
 	}
 }
 
-func (s *UserRpcServer) Ping(ctx context.Context, in *user_rpc.Request) (*user_rpc.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+func (s *UserRpcServer) Login(ctx context.Context, in *user.LoginRequest) (*user.LoginResponse, error) {
+	l := logic.NewLoginLogic(ctx, s.svcCtx)
+	return l.Login(in)
 }
