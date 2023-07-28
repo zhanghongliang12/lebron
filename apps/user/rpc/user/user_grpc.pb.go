@@ -49,7 +49,7 @@ func (c *userRpcClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 // UserRpcServer is the server API for UserRpc service.
 // All implementations must embed UnimplementedUserRpcServer
 // for forward compatibility
-type UserRpcServer interface {
+type UserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	mustEmbedUnimplementedUserRpcServer()
 }
@@ -70,7 +70,7 @@ type UnsafeUserRpcServer interface {
 	mustEmbedUnimplementedUserRpcServer()
 }
 
-func RegisterUserRpcServer(s grpc.ServiceRegistrar, srv UserRpcServer) {
+func RegisterUserRpcServer(s grpc.ServiceRegistrar, srv UserServer) {
 	s.RegisterService(&UserRpc_ServiceDesc, srv)
 }
 
@@ -80,14 +80,14 @@ func _UserRpc_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserRpcServer).Login(ctx, in)
+		return srv.(UserServer).Login(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: UserRpc_Login_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserRpcServer).Login(ctx, req.(*LoginRequest))
+		return srv.(UserServer).Login(ctx, req.(*LoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -97,7 +97,7 @@ func _UserRpc_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 // and not to be introspected or modified (even as a copy)
 var UserRpc_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "user.User_rpc",
-	HandlerType: (*UserRpcServer)(nil),
+	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Login",
