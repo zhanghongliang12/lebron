@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package user_rpc;
-option go_package="./user_rpc";
+package user;
+option go_package="./user";
 
 //用户登陆
 message LoginRequest {
