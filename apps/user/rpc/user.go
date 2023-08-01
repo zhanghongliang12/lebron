@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zhanghongliang12/lebron/pkg/interceptor/rpcserver"
 
 	"github.com/zhanghongliang12/lebron/apps/user/rpc/internal/config"
 	"github.com/zhanghongliang12/lebron/apps/user/rpc/internal/server"
@@ -24,14 +25,17 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-
+	svr := server.NewUserRpcServer(ctx)
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		user.RegisterUserRpcServer(grpcServer, server.NewUserRpcServer(ctx))
+		user.RegisterUserRpcServer(grpcServer, svr)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
 		}
 	})
+	// 添加rpc日志
+	s.AddUnaryInterceptors(rpcserver.LoggerInterceptor)
+
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
