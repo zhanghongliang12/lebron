@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"fmt"
 	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 	"github.com/zhanghongliang12/lebron/apps/user/rpc/internal/svc"
@@ -39,6 +40,8 @@ func (l *LoginLogic) Login(in *user.LoginRequest) (*user.LoginResponse, error) {
 	}
 	//verify user password
 	md5ByString, err := tool.Md5ByString(in.Password)
+	fmt.Println(md5ByString)
+	fmt.Println(userDB.Password)
 	if !(md5ByString == userDB.Password) {
 		return nil, errors.Wrap(xerr.NewErrMsg("账号或密码错误"), "密码错误")
 	}
